@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="Carga Masiva de Tanques" icon-name="custom:custom63">
+      <div class="slds-p-around_medium">
+  
+        <!-- Upload archivo CSV -->
+        <lightning-input
+          type="file"
+          label="Subir archivo CSV"
+          accept=".csv"
+          onchange={manejarArchivoCSV}
+          class="slds-m-top_small"
+          aria-label="Subir archivo CSV con datos de tanques">
+        </lightning-input>
+  
+        <!-- Mostrar errores -->
+        <template if:true={errorCarga}>
+          <div class="slds-text-color_error slds-m-top_small">{errorCarga}</div>
+        </template>
+  
+        <!-- Tabla vista previa -->
+        <template if:true={tanquesPreview.length}>
+          <lightning-datatable
+            key-field="numeroSerie"
+            data={tanquesPreview}
+            columns={columnasTabla}
+            class="slds-m-top_medium">
+          </lightning-datatable>
+  
+          <!-- Botón para crear tanques -->
+          <lightning-button
+            variant="brand"
+            label="Crear Tanques"
+            onclick={crearTanques}
+            class="slds-m-top_medium">
+          </lightning-button>
+        </template>
+  
+        <!-- Botón de prueba para PapaParse -->
+        <lightning-button
+          variant="neutral"
+          label="Probar PapaParse"
+          onclick={probarPapaParse}
+          class="slds-m-top_medium"
+          aria-label="Botón para probar la carga y parseo de PapaParse">
+        </lightning-button>
+  
+      </div>
+    </lightning-card>
+  </template>
+  
